@@ -23,7 +23,7 @@ export default function AppHeader() {
     <AppBar className={classes.appBar} position="static">
       <Toolbar>
         <Typography variant="h6" className={classes.title}>
-          Hacker News
+          <a href="/">Hacker News</a>
         </Typography>
       </Toolbar>
     </AppBar>

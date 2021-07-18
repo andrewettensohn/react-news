@@ -32,3 +32,14 @@ export const getTopStoryIds = async () => {
 
     return ids;
 }
+
+export const getUserInfo = async (userName) => {
+
+    const response = await axios.get(
+        `https://hacker-news.firebaseio.com/v0/user/${userName}.json?print=pretty`
+    );
+
+    const userData = await response.data;
+
+    return userData;
+}

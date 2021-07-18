@@ -1,30 +1,10 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Link from '@material-ui/core/Link';
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import PersonIcon from '@material-ui/icons/Person';
-
-const useStyles = makeStyles({
-    root: {
-      marginBottom: 3,
-      minWidth: 300,
-    },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
-    },
-    title: {
-      fontSize: 12,
-    },
-    host: {
-      marginBottom: 1,
-      fontSize: 10,
-    },
-  });
 
 export default function StoryCard(props) {
 
@@ -52,7 +32,9 @@ export default function StoryCard(props) {
                 {props.story.descendants}<ChatBubbleOutlineIcon fontSize="small" />
             </TableCell>
             <TableCell align="right">
+              <a href={"/user?id=" + props.story.by}>
                 {props.story.by} <PersonIcon fontSize="small" />
+              </a>
             </TableCell>
             <TableCell align="right">{postTime}</TableCell>
         </TableRow>

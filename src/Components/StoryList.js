@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Container from '@material-ui/core/Container';
-import StoryCard from './StoryCard'
+import StoryRow from './StoryRow'
 import { getStories } from '../Utilities/RestService';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -58,7 +58,7 @@ export default function StoryList() {
                         </TableHead>
                         <TableBody>
                         {stories.map((story) => (
-                            <StoryCard key={story.id} story={story} />
+                            <StoryRow key={story.id} story={story} />
                         ))}
                         </TableBody>
                     </Table>
