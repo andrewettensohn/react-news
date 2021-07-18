@@ -9,7 +9,9 @@ const useStyles = makeStyles({
     h6: 'h2',
   },
   appBar: {
-    backgroundColor: '#1e1e1e'
+    backgroundColor: '#ff6600',
+    maxHeight: 50,
+    marginBottom: 10
   }
 });
 
