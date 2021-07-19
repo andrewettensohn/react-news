@@ -7,22 +7,23 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { getUserInfo } from '../Utilities/RestService';
+import ReactHtmlParser from 'react-html-parser';
 
 const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
+    root: {
+        minWidth: 275,
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
 });
 
 export default function UserInfo() {
@@ -33,7 +34,7 @@ export default function UserInfo() {
     let userName = params.get("id");
 
     useEffect(() => {
-        
+
         getUserInfo(userName)
             .then((result) => {
                 result.created = new Date(result.created * 1000).toISOString().slice(0, 10);
@@ -41,7 +42,7 @@ export default function UserInfo() {
             })
             .catch((err) => console.log(err));
 
-            console.log(userInfo)
+        console.log(userInfo)
 
     }, []);
 
@@ -59,7 +60,7 @@ export default function UserInfo() {
                         Karma: {userInfo.karma}
                     </Typography>
                     <Typography variant="body2" component="p">
-                        {decodeAbout(userInfo.about)}
+                        {ReactHtmlParser(userInfo.about)}
                     </Typography>
                 </CardContent>
                 <CardActions>
@@ -68,13 +69,4 @@ export default function UserInfo() {
             </Card>
         </Container>
     );
-}
-
-function decodeAbout(html) {
-    if(html)
-    {
-        var txt = document.createElement("textarea");
-        txt.innerHTML = html;
-        return txt.value;
-    }
 }

@@ -13,16 +13,16 @@ import {
 export default function App() {
   return (
     <div className="App">
-    <AppHeader />
+      <AppHeader />
       <Router>
-      <Switch>
-            <Route path="/user">
-              <UserInfo  />
-            </Route>
-            <Route path="/">
-              <StoryList />
-            </Route>
-          </Switch>
+        <Switch>
+          <Route path="/user">
+            <UserInfo />
+          </Route>
+          <Route path="/">
+            <StoryList />
+          </Route>
+        </Switch>
       </Router>
     </div>
   );

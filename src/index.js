@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@fontsource/roboto';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 ReactDOM.render(
   <React.StrictMode>

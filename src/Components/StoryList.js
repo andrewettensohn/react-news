@@ -2,73 +2,78 @@ import React, { useState, useEffect } from "react";
 import Container from '@material-ui/core/Container';
 import StoryRow from './StoryRow'
 import { getStories } from '../Utilities/RestService';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Pagination from '@material-ui/lab/Pagination';
-
-const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
-    },
-    pagingBox: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-  });
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function StoryList() {
-    const classes = useStyles();
     const [stories, setStories] = useState([]);
     const [pageNum, setPageNum] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        
+
         setPageNum(1);
+        setIsLoading(true);
 
         getStories(pageNum)
             .then((result) => setStories(result))
             .catch((err) => console.log(err));
 
-            console.log(stories)
 
-            setIsLoading(false);
+        setIsLoading(false);
     }, []);
 
     const handlePage = (event, value) => {
+
         setPageNum(value);
-    
+        setIsLoading(true);
+
         getStories(pageNum)
-        .then((result) => setStories(result))
-        .catch((err) => console.log(err));
+            .then((result) => setStories(result))
+            .catch((err) => console.log(err));
 
-        console.log(stories)
-      };
+        setIsLoading(false);
+    };
 
-    if(!isLoading){
+    if (stories.length > 0 && !isLoading) {
         return (
             <Container>
                 <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="simple table">
+                    <Table aria-label="simple table">
                         <TableHead>
                         </TableHead>
                         <TableBody>
-                        {stories.map((story) => (
-                            <StoryRow key={story.id} story={story} />
-                        ))}
+                            {stories.map((story) => (
+                                <StoryRow key={story.id} story={story} />
+                            ))}
                         </TableBody>
                     </Table>
-                    <Pagination count={50} onChange={handlePage} shape="rounded" />
+                    <Box
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                    >
+                        <Pagination count={50} onChange={handlePage} shape="rounded" />
+                    </Box>
                 </TableContainer>
             </Container>
         );
     } else {
         return (
-            <p>Loading...</p>
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                color="secondary"
+            >
+                <CircularProgress />
+            </Box>
         );
     }
 }
