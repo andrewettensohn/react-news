@@ -32,9 +32,8 @@ export default function Comment(props) {
 
         getComments(props.item.kids)
             .then((result) => setComments(result))
-            .catch((err) => console.log(err));
-
-        setIsLoading(false);
+            .catch((err) => console.log(err))
+            .finally(() => setIsLoading(false))
     }, []);
 
     if (!isLoading && comments.length > 0) {

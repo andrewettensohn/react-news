@@ -23,26 +23,21 @@ export default function Item() {
         setIsLoading(false);
     }, []);
 
-    if (item.time && !isLoading) {
-        return (
-            <Box
-                justifyContent="center"
-                alignItems="center"
-                color="secondary">
-                <StoryRow story={item} />
-                <Comments item={item} />
-            </Box>
-        );
-    } else {
-        return (
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                color="secondary"
-            >
-                <CircularProgress />
-            </Box>
-        );
-    }
+
+    return item.time && !isLoading
+        ? <Box
+            justifyContent="center"
+            alignItems="center"
+            color="secondary">
+            <StoryRow story={item} />
+            <Comments item={item} />
+        </Box>
+        : <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            color="secondary"
+        >
+            <CircularProgress />
+        </Box>
 }
